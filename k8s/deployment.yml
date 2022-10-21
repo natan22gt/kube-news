@@ -55,23 +55,23 @@ spec:
         app: kube-news
     spec:
       containers:
-        - name: kube-news
-          image: natan4dev/kube-news
-          resources:
-            limits:
-              memory: "128Mi"
-              cpu: "500m"
-          ports:
-            - containerPort: 8080
-          env:
-            - name: DB_USERNAME
-              value: "kubedevnews"
-            - name: DB_DATABASE
-              value: "kubedevnews"
-            - name: DB_PASSWORD
-              value: "Pg#123"
-            - name: DB_HOST
-              value: "postgre"
+      - name: kube-news
+        image: natan4dev/kube-news
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+          - containerPort: 8080
+        env:
+          - name: DB_USERNAME
+            value: "kubedevnews"
+          - name: DB_DATABASE
+            value: "kubedevnews"
+          - name: DB_PASSWORD
+            value: "Pg#123"
+          - name: DB_HOST
+            value: "postgre"
 ---
 apiVersion: v1
 kind: Service
@@ -83,6 +83,6 @@ spec:
   ports:
     - port: 80
       targetPort: 8080
-      protocol: TCP
+      # protocol: TCP
       nodePort: 31000
   type: NodePort

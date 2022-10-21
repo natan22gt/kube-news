@@ -1,0 +1,14 @@
+pipeline {
+  agents any
+
+  stages {
+    stage ("Build docker image") {
+      steps {
+        script {
+          dockerapp = docker.build("natan4dev/kube-news:${env.BUILD_ID}", '-f ./src/dockerfile ./src')
+
+        }
+      }
+    }
+  }
+}

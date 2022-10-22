@@ -22,19 +22,19 @@ pipeline {
     }
 
 
-    stage ("Deploy kubernetes") {
-      environment {
-        tag_version = "${env.BUILD_ID}"
-      }
-      steps {
-        withCredentials([string(credentialsId: 'github', variable: 'github')]){
-          withKubeConfig (credentialsId: "kube config") {
-          sh 'sed -i "s/{{TAG}}/$tag_version/g" ./k8s/deployment.yml'
+    // stage ("Deploy kubernetes") {
+    //   environment {
+    //     tag_version = "${env.BUILD_ID}"
+    //   }
+    //   steps {
+    //     withCredentials([string(credentialsId: 'github', variable: 'github')]){
+    //       withKubeConfig (credentialsId: "kube config") {
+    //       sh 'sed -i "s/{{TAG}}/$tag_version/g" ./k8s/deployment.yml'
 
-          sh "kubectl apply -f ./k8s/deployment.yml --token $github"
-        }
-        }
-      }
-    }
+    //       sh "kubectl apply -f ./k8s/deployment.yml --token $github"
+    //     }
+    //     }
+    //   }
+    // }
   }
 }

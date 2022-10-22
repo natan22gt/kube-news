@@ -57,7 +57,7 @@ spec:
     spec:
       containers:
       - name: kube-news
-        image: natan4dev/kube-news:{{TAG}}
+        image: natan4dev/kube-news:v1
         resources:
           limits:
             memory: "128Mi"

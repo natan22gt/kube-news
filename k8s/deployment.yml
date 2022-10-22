@@ -46,7 +46,7 @@ kind: Deployment
 metadata:
   name: kube-news
 spec:
-  replicas: 5
+  replicas: 10
   selector:
     matchLabels:
       app: kube-news
@@ -54,10 +54,14 @@ spec:
     metadata:
       labels:
         app: kube-news
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8080"
+        prometheus.io/path: "/metrics"
     spec:
       containers:
       - name: kube-news
-        image: natan4dev/kube-news:v1
+        image: natan4dev/kube-news:{{TAG}}
         resources:
           limits:
             memory: "128Mi"
